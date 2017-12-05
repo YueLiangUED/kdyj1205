@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title>宽带移机</title>
+    <script type="text/javascript">
+        (function (global) {
+            function remChange() {
+                document.documentElement.style.fontSize = 100 * document.documentElement.clientWidth / 750 + 'px';
+            }
+            remChange();
+            global.addEventListener('resize', remChange, false);
+        })(window);
+    </script>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" type="text/css" href="css/mobiscroll_date.css" />
+    <link rel="stylesheet" type="text/css" href="css/mobiscroll.css" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="view-wrapper">
+        <div class="yj-form">
+            <div class="yj-form-title">宽带账号：</div>
+            <input class="yj-form-input" type="tel" />
+            <div class="yj-form-title">身份证号码：</div>
+            <input class="yj-form-input" type="text" />
+            <div class="yj-form-title">联系电话：</div>
+            <input class="yj-form-input" type="tel" />
+            <div class="yj-form-qu">
+                <span>移机日期：</span>
+                <!-- <select name="" id="" style="width: 3.6rem;background: none;"> -->
+                    <input class="yj-form-input" readonly onfocus="this.blur()" id="selectDate" type="text" style="width: 3.6rem;" placeholder="请选择移机日期" />
+                <!-- </select> -->
+            </div>
+            <div class="yj-form-qu">
+                <span>移机时间：</span>
+                <select name="" id="" style="width: 3.6rem;background-position: 3.3rem;">
+                    <option value="">请选择期望安装时间段</option>
+                    <option value="">上午(9:00-11:00)</option>
+                    <option value="">中午(11:00-13:00)</option>
+                    <option value="">下午(13:00-17:00)</option>
+                    <option value="">傍晚(17:00-20:00)</option>
+                </select>
+            </div>
+            <div class="yj-form-qu">
+                <span>移机地址：</span>
+                <span>北京市</span>
+                <select name="" id="">
+                    <option value="">请选择区县</option>
+                    <option value="朝阳区">东城区</option>
+                    <option value="西城区">西城区</option>
+                    <option value="朝阳区">西城区</option>
+                    <option value="海淀区">西城区</option>
+                    <option value="丰台区">丰台区</option>
+                    <option value="大兴区">大兴区</option>
+                    <option value="怀柔区">怀柔区</option>
+                    <option value="昌平区">昌平区</option>
+                    <option value="顺义区">顺义区</option>
+                    <option value="通州区">通州区</option>
+                    <option value="石景山区">石景山区</option>
+                    <option value="房山区">房山区</option>
+                    <option value="平谷区">平谷区</option>
+                    <option value="密云县">密云县</option>
+                    <option value="延庆县">延庆县</option>
+                    <option value="门头沟区">门头沟区</option>
+                </select>
+            </div>
+            <input class="yj-form-input" type="text" placeholder="请输入小区名或村名" style="margin-bottom: 0.3rem;" />
+            <div class="yj-form-lou">
+                <input type="text" placeholder="请输入楼号" /><span>号楼</span><input type="text" placeholder="请输入单元" /><span>单元</span><input type="text" placeholder="房号或门牌号" style="font-size: 0.2rem;" /><span>号</span>
+            </div>
+            <div class="yj-form-tip">
+                例如:广渠门内大街安化北里小区10号院10号楼105室<br />
+                具体地址能否安装，及业务规则是否符合办理条件，以工作人员确认为准，如不符合安装及办理条件订单自动取消，届时将短信通知您。
+            </div>
+            <div class="yj-form-btn">
+                <input class="yj-form-sub" type="button" value="提交申请" />
+            </div>
+        </div>
+        <div class="mask" style="display: none;"></div>
+        <div class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-head">
+                移机申请
+            </div>
+            <div class="modal-body">
+                <p>宽带账号：<span>0000000000000000000</span></p>
+                <p>身份证号：<span>123456789012345678</span></p>
+                <p>联系电话：<span>13838693686</span></p>
+                <p>移机日期：<span>20117-12-05</span></p>
+                <p>移机时间：<span>上午(9:00-11:00)</span></p>
+                <p>移机地址：<span>北京市东城区东中街58号美惠大厦A座南侧6层西区38号工位</span></p>
+                <span class="modal-enter">确认提交</span>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/mobiscroll_date.js"></script>
+    <script type="text/javascript" src="js/mobiscroll.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
+
+
