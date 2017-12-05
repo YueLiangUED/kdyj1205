@@ -28,12 +28,22 @@
         <img src="images/suc_icon.png" alt="" />
         <p style="color: #80c26a;margin-bottom: 1rem;">提交成功</p>
         <p style="margin-bottom: 0.6rem;">您的宽带移机申请已成功受理！</p>
-        <p class="order-num">订单编号：<span>12345678</span></p>
+        <p class="order-num">订单编号：<span id="order-number">12345678</span></p>
         <p style="font-size: 0.32rem;color: #ff0000;">已收到您的移机申请，48小时内将有工作人员与您联系办理移机事宜，感谢您的支持。</p>
         <a class="return-btn" href="">返回宽带专区</a>
     </div>
     <script src="js/jquery-1.10.1.min.js"></script>
     <script src="js/index.js"></script>
+    <script type="text/javascript">
+
+        function GetRandomNum(Min,Max) {   
+            var Range = Max - Min;   
+            var Rand = Math.random();   
+            return(Min + Math.round(Rand * Range));   
+        }   
+        var randnum =  GetRandomNum(10000000,99999999)
+        $('#order-number').text(randnum);
+    </script>
 </body>
 </html>
 
