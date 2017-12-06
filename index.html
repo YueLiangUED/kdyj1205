@@ -42,7 +42,7 @@
             <div class="yj-form-qu">
                 <span>移机时间：</span>
                 <select name="" id="kdTimeInput" style="width: 3.6rem;background-position: 3.3rem;">
-                    <option value="">请选择期望安装时间段</option>
+                    <option value="">请选择期望移机时间段</option>
                     <option value="上午(9:00-11:00)">上午(9:00-11:00)</option>
                     <option value="中午(11:00-13:00)">中午(11:00-13:00)</option>
                     <option value="下午(13:00-17:00)">下午(13:00-17:00)</option>
@@ -54,10 +54,10 @@
                 <span>北京市</span>
                 <select name="" id="kdAddInput">
                     <option value="">请选择区县</option>
-                    <option value="朝阳区">东城区</option>
+                    <option value="东城区">东城区</option>
                     <option value="西城区">西城区</option>
-                    <option value="朝阳区">西城区</option>
-                    <option value="海淀区">西城区</option>
+                    <option value="朝阳区">朝阳区</option>
+                    <option value="海淀区">海淀区</option>
                     <option value="丰台区">丰台区</option>
                     <option value="大兴区">大兴区</option>
                     <option value="怀柔区">怀柔区</option>
@@ -98,6 +98,7 @@
                 <p>移机时间：<span id="kdTimeGet">上午(9:00-11:00)</span></p>
                 <p>移机地址：<span id="kdAddGet">北京市东城区东中街58号美惠大厦A座南侧6层西区38号工位</span></p>
                 <span class="modal-enter">确认提交</span>
+                <p class="modal-close" style="text-align: center;color: #999;margin-bottom: 0;line-height: 40px;">修改信息</p>
             </div>
         </div>
         </div>
@@ -139,6 +140,7 @@
                     $kdDateInput = $('#kdDateInput').val(),
                     $kdTimeInput = $('#kdTimeInput').val(),
                     $kdAddInput = $('#kdAddInput').val(),
+                    $kdCunInput = $('#kdCunInput').val(),
                     $kdLouInput = $('#kdLouInput').val(),
                     $kdDanInput = $('#kdDanInput').val(),
                     $kdMenInput = $('#kdMenInput').val();
@@ -149,6 +151,7 @@
                     'kdDateInput': $kdDateInput,
                     'kdTimeInput': $kdTimeInput,
                     'kdAddInput': $kdAddInput,
+                    'kdCunInput': $kdCunInput,
                     'kdLouInput': $kdLouInput,
                     'kdDanInput': $kdDanInput,
                     'kdMenInput': $kdMenInput
@@ -157,21 +160,43 @@
             
             function modalShow(ele) {
             $('.mask').fadeIn();
-            $(ele).fadeIn();
+                $(ele).fadeIn();
             }
             function modalHide(ele) {
             var $modal = $(ele).parents('.modal');
             $('.mask').fadeOut();
-            $modal.fadeOut();
+                $modal.fadeOut();
             }
 
             $('.yj-form-sub').on('touchend', function () {
+                
+                if ($('#kdAccountInput').val() == '') {
+                    alert('请填写宽带账号！');
+                    return false;
+                }else if ($('#kdIdcardInput').val() == '') {
+                    alert('请填写身份证号！');
+                    return false;
+                }else if ($('#kdTelInput').val() == '') {
+                    alert('请填写联系电话！');
+                    return false;
+                }else if ($('#kdDateInput').val() == '') {
+                    alert('请选择移机日期！');
+                    return false;
+                }else if ($('#kdTimeInput').val() == '') {
+                    alert('请选择移机时间段！');
+                    return false;
+                }else if ($('#kdCunInput').val() == '' || $('#kdAddInput').val() == '' || $('#kdLouInput').val() == '' || $('#kdDanInput').val() == '' || $('#kdMenInput').val() == '') {
+                    alert('请填写完整移机地址！');
+                    return false;
+                }
                 var data = getData();
+                console.log(data.kdTelInput)
                 $('#kdAccountGet').text(data.kdAccountInput);
                 $('#kdIdcardGet').text(data.kdIdcardInput);
+                $('#kdTelGet').text(data.kdTelInput);
                 $('#kdDateGet').text(data.kdDateInput);
                 $('#kdTimeGet').text(data.kdTimeInput);
-                $('#kdAddGet').text(data.kdAddInput + data.kdLouInput + '号楼' + data.kdDanInput + '单元' + data.kdMenInput + '号');
+                $('#kdAddGet').text(data.kdAddInput + data.kdCunInput + data.kdLouInput + '号楼' + data.kdDanInput + '单元' + data.kdMenInput + '号');
                 modalShow('.modal');
             });
 
@@ -179,7 +204,9 @@
                 modalHide(this);
                 window.location.href = 'index_02.html'
             });
-
+            $('.modal-close').on('touchend', function () {
+                modalHide('.modal-close');
+            });
         });
     </script>
 </body>
