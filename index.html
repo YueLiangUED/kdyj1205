@@ -28,31 +28,31 @@
     <div class="view-wrapper">
         <div class="yj-form">
             <div class="yj-form-title">宽带账号：</div>
-            <input class="yj-form-input" type="tel" />
+            <input id="kdAccountInput" class="yj-form-input" type="tel" />
             <div class="yj-form-title">身份证号码：</div>
-            <input class="yj-form-input" type="text" />
+            <input id="kdIdcardInput" class="yj-form-input" type="text" />
             <div class="yj-form-title">联系电话：</div>
-            <input class="yj-form-input" type="tel" />
+            <input id="kdTelInput" class="yj-form-input" type="tel" />
             <div class="yj-form-qu">
                 <span>移机日期：</span>
                 <!-- <select name="" id="" style="width: 3.6rem;background: none;"> -->
-                    <input class="yj-form-input" readonly onfocus="this.blur()" id="selectDate" type="text" style="width: 3.6rem;" placeholder="请选择移机日期" />
+                    <input id="kdDateInput" class="yj-form-input" readonly onfocus="this.blur()" type="text" style="width: 3.6rem;" placeholder="请选择移机日期" />
                 <!-- </select> -->
             </div>
             <div class="yj-form-qu">
                 <span>移机时间：</span>
-                <select name="" id="" style="width: 3.6rem;background-position: 3.3rem;">
+                <select name="" id="kdTimeInput" style="width: 3.6rem;background-position: 3.3rem;">
                     <option value="">请选择期望安装时间段</option>
-                    <option value="">上午(9:00-11:00)</option>
-                    <option value="">中午(11:00-13:00)</option>
-                    <option value="">下午(13:00-17:00)</option>
-                    <option value="">傍晚(17:00-20:00)</option>
+                    <option value="上午(9:00-11:00)">上午(9:00-11:00)</option>
+                    <option value="中午(11:00-13:00)">中午(11:00-13:00)</option>
+                    <option value="下午(13:00-17:00)">下午(13:00-17:00)</option>
+                    <option value="傍晚(17:00-20:00)">傍晚(17:00-20:00)</option>
                 </select>
             </div>
             <div class="yj-form-qu">
                 <span>移机地址：</span>
                 <span>北京市</span>
-                <select name="" id="">
+                <select name="" id="kdAddInput">
                     <option value="">请选择区县</option>
                     <option value="朝阳区">东城区</option>
                     <option value="西城区">西城区</option>
@@ -72,9 +72,9 @@
                     <option value="门头沟区">门头沟区</option>
                 </select>
             </div>
-            <input class="yj-form-input" type="text" placeholder="请输入小区名或村名" style="margin-bottom: 0.3rem;" />
+            <input id="kdCunInput" class="yj-form-input" type="text" placeholder="请输入小区名或村名" style="margin-bottom: 0.3rem;" />
             <div class="yj-form-lou">
-                <input type="text" placeholder="请输入楼号" /><span>号楼</span><input type="text" placeholder="请输入单元" /><span>单元</span><input type="text" placeholder="房号或门牌号" style="font-size: 0.2rem;" /><span>号</span>
+                <input id="kdLouInput" type="text" placeholder="请输入楼号" /><span>号楼</span><input id="kdDanInput" type="text" placeholder="请输入单元" /><span>单元</span><input id="kdMenInput" type="text" placeholder="房号或门牌号" style="font-size: 0.2rem;" /><span>号</span>
             </div>
             <div class="yj-form-tip">
                 例如:广渠门内大街安化北里小区10号院10号楼105室<br />
@@ -91,12 +91,12 @@
                 移机申请
             </div>
             <div class="modal-body">
-                <p>宽带账号：<span>0000000000000000000</span></p>
-                <p>身份证号：<span>123456789012345678</span></p>
-                <p>联系电话：<span>13838693686</span></p>
-                <p>移机日期：<span>20117-12-05</span></p>
-                <p>移机时间：<span>上午(9:00-11:00)</span></p>
-                <p>移机地址：<span>北京市东城区东中街58号美惠大厦A座南侧6层西区38号工位</span></p>
+                <p>宽带账号：<span id="kdAccountGet">0000000000000000000</span></p>
+                <p>身份证号：<span id="kdIdcardGet">123456789012345678</span></p>
+                <p>联系电话：<span id="kdTelGet">13838693686</span></p>
+                <p>移机日期：<span id="kdDateGet">20117-12-05</span></p>
+                <p>移机时间：<span id="kdTimeGet">上午(9:00-11:00)</span></p>
+                <p>移机地址：<span id="kdAddGet">北京市东城区东中街58号美惠大厦A座南侧6层西区38号工位</span></p>
                 <span class="modal-enter">确认提交</span>
             </div>
         </div>
@@ -108,6 +108,7 @@
     <script src="js/index.js"></script>
     <script type="text/javascript">
         $(function () {
+            // 日期插件
             (function () {
                 var currYear = (new Date()).getFullYear();
                 var opt={};
@@ -127,8 +128,58 @@
                 minDate: new Date()
                 };
 
-                $("#selectDate").mobiscroll($.extend(opt['date'], opt['default']));
+                $("#kdDateInput").mobiscroll($.extend(opt['date'], opt['default']));
             })();
+
+            // 获取输入数据
+            function getData() {
+                var $kdAccountInput = $('#kdAccountInput').val(),
+                    $kdIdcardInput = $('#kdIdcardInput').val(),
+                    $kdTelInput = $('#kdTelInput').val(),
+                    $kdDateInput = $('#kdDateInput').val(),
+                    $kdTimeInput = $('#kdTimeInput').val(),
+                    $kdAddInput = $('#kdAddInput').val(),
+                    $kdLouInput = $('#kdLouInput').val(),
+                    $kdDanInput = $('#kdDanInput').val(),
+                    $kdMenInput = $('#kdMenInput').val();
+                return {
+                    'kdAccountInput': $kdAccountInput,
+                    'kdIdcardInput': $kdIdcardInput,
+                    'kdTelInput': $kdTelInput,
+                    'kdDateInput': $kdDateInput,
+                    'kdTimeInput': $kdTimeInput,
+                    'kdAddInput': $kdAddInput,
+                    'kdLouInput': $kdLouInput,
+                    'kdDanInput': $kdDanInput,
+                    'kdMenInput': $kdMenInput
+                }
+            }
+            
+            function modalShow(ele) {
+            $('.mask').fadeIn();
+            $(ele).fadeIn();
+            }
+            function modalHide(ele) {
+            var $modal = $(ele).parents('.modal');
+            $('.mask').fadeOut();
+            $modal.fadeOut();
+            }
+
+            $('.yj-form-sub').on('touchend', function () {
+                var data = getData();
+                $('#kdAccountGet').text(data.kdAccountInput);
+                $('#kdIdcardGet').text(data.kdIdcardInput);
+                $('#kdDateGet').text(data.kdDateInput);
+                $('#kdTimeGet').text(data.kdTimeInput);
+                $('#kdAddGet').text(data.kdAddInput + data.kdLouInput + '号楼' + data.kdDanInput + '单元' + data.kdMenInput + '号');
+                modalShow('.modal');
+            });
+
+            $('.modal-enter').on('touchend', function () {
+                modalHide(this);
+                window.location.href = 'index_02.html'
+            });
+
         });
     </script>
 </body>
